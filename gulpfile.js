@@ -11,6 +11,7 @@ var uglify              = require('gulp-uglify');
 var notify              = require("gulp-notify");
 var webpack             = require("gulp-webpack");
 var webpackConfig       = require("./webpack.config.js");
+var browserSync         = require('browser-sync').create();
 
 // Paths
 var paths = {
@@ -19,11 +20,21 @@ var paths = {
     haml: ['src/*.haml']
 };
 
+//Browser-sync
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./build"
+        }
+    });
+});
+
 // HTML
 gulp.task('haml', function () {
     gulp.src(paths.haml)
         .pipe(haml())
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest('build'))
+        .pipe(browserSync.stream());
 });
 
 // Javascript
@@ -31,7 +42,7 @@ gulp.task("javascript", function() {
     return gulp.src('src/js/app.js')
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('build/js'))
-        .pipe(notify("Bundling done."));
+        .pipe(browserSync.stream());
 });
 
 // Sass
@@ -49,4 +60,4 @@ gulp.task('watch', function() {
 });
 
 // Default task
-gulp.task('default', ['watch', 'javascript', 'haml', 'sass']);
+gulp.task('default', ['watch', 'browser-sync', 'javascript', 'haml', 'sass']);

@@ -1,15 +1,16 @@
 {
-  "name": "Boilerplate",
+  "name": "boilerplate",
   "version": "0.0.1",
   "description": "A boilerplate for front-end applications using Gulp, Browserify, Coffeescript, SASS and HAML",
   "main": "gulpfile.js",
   "dependencies": {
+    "browser-sync": "^2.26.7",
     "gulp": "^3.8.11",
     "gulp-haml-coffee": "^0.0.6",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.0.1",
-    "gulp-util": "^3.0.4",
     "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.4",
     "haml": "^0.4.3",
     "jquery": "^2.1.4"
   },
